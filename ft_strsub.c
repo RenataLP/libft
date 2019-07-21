@@ -1,31 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkristle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 17:00:33 by bkristle          #+#    #+#             */
-/*   Updated: 2019/04/09 17:00:33 by bkristle         ###   ########.fr       */
+/*   Created: 2019/04/19 13:34:25 by bkristle          #+#    #+#             */
+/*   Updated: 2019/04/19 13:34:25 by bkristle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+static char		*st_strnew(size_t size)
 {
-	int i;
+	char	*arr;
 
-	i = 0;
-	while (n > 0)
+	if (!(arr = (char *)malloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	while (size > 0)
 	{
-		if (((const unsigned char *)s1)[i] != ((const unsigned char *)s2)[i])
-		{
-			return (((const unsigned char *)s1)[i] -
-					((const unsigned char *)s2)[i]);
-		}
-		i++;
-		n--;
+		arr[size] = 0;
+		size--;
 	}
-	return (0);
+	arr[size] = 0;
+	return (arr);
+}
+
+char			*ft_strsub(char const *s, unsigned int start, size_t len)
+{
+	char	*arr;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	if (!(arr = st_strnew(len)))
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		arr[i] = s[(size_t)start + i];
+		i++;
+	}
+	arr[i] = 0;
+	return (arr);
 }

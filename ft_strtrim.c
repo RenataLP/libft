@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkristle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 17:00:59 by bkristle          #+#    #+#             */
-/*   Updated: 2019/04/09 17:00:59 by bkristle         ###   ########.fr       */
+/*   Created: 2019/04/19 16:55:12 by bkristle          #+#    #+#             */
+/*   Updated: 2019/04/19 16:55:12 by bkristle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strtrim(char const *s)
 {
-	char	*s2;
 	size_t	i;
 	size_t	len;
+	char	*str;
 
-	i = 0;
-	len = ft_strlen(s1) + 1;
-	s2 = (char *)malloc(sizeof(char) * len);
-	if (s2 == NULL)
+	if (!s)
 		return (NULL);
-	while (s1[i] != '\0')
+	i = 0;
+	len = ft_strlen(s);
+	while ((s[len - 1] == ' ' || s[len - 1] == '\t' || s[len - 1] == '\n'))
+		len--;
+	while ((s[i] == ' ' || s[i] == '\t' || s[i] == '\n') && s[i] != '\0')
 	{
-		s2[i] = s1[i];
+		len--;
 		i++;
 	}
-	s2[i] = '\0';
-	return (s2);
+	if ((int)len <= 0)
+		len = 0;
+	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	s = s + i;
+	i = -1;
+	while (++i < len)
+		str[i] = *s++;
+	str[i] = '\0';
+	return (str);
 }

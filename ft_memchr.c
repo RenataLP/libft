@@ -1,26 +1,25 @@
-#include <stdlib.h>
-#include <stddef.h>
-#include <string.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bkristle <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/06 22:35:20 by bkristle          #+#    #+#             */
+/*   Updated: 2019/04/06 22:35:20 by bkristle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void    *ft_memchr(const void *s, int c, size_t n)
+#include "libft.h"
+
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-    int i;
-
-    i = 0;
-    while (n > 0)
-    {
-        if (((const char *)s)[i] == (char)c)
-            return ((void *)s);
-        i++;
-        n--;
-    }
-    return (NULL);
-}
-
-int main()
-{
-    char a[5] = "sdfs";
-    //printf("%s\n", ft_memchr(a, 'f', 2));
-    printf("%s\n", memchr(a, 'a', 2));
-    return (0);
+	while (n > 0)
+	{
+		if (*((const char *)s) == (char)c)
+			return ((void *)s);
+		s++;
+		n--;
+	}
+	return (NULL);
 }

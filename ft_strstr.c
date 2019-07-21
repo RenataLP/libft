@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   strstr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkristle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 17:00:33 by bkristle          #+#    #+#             */
-/*   Updated: 2019/04/09 17:00:33 by bkristle         ###   ########.fr       */
+/*   Created: 2019/04/06 18:33:51 by bkristle          #+#    #+#             */
+/*   Updated: 2019/04/06 18:33:51 by bkristle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+char	*ft_strstr(const char *src, const char *fnd)
 {
 	int i;
+	int j;
+	int length;
 
 	i = 0;
-	while (n > 0)
+	j = 0;
+	length = 0;
+	while (fnd[length])
+		length++;
+	if (length == 0)
+		return ((char *)src);
+	while (src[i])
 	{
-		if (((const unsigned char *)s1)[i] != ((const unsigned char *)s2)[i])
+		while (fnd[j] == src[i + j])
 		{
-			return (((const unsigned char *)s1)[i] -
-					((const unsigned char *)s2)[i]);
+			if (j == length - 1)
+				return ((char *)src + i);
+			j++;
 		}
+		j = 0;
 		i++;
-		n--;
 	}
-	return (0);
+	return (NULL);
 }
